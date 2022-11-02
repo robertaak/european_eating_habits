@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Entries</h1>
 
 <table>
@@ -31,3 +29,5 @@
 </table>
 
 <br>
+
+<%= bar_chart Entry.group(:country).count %>
