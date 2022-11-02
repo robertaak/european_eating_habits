@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country: MyString
+  population_group: MyString
+  food_group: MyString
+  subjects: 1
+  consumers: 1
+  mean: 1.5
+
+two:
+  country: MyString
+  population_group: MyString
+  food_group: MyString
+  subjects: 1
+  consumers: 1
+  mean: 1.5
