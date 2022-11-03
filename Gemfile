@@ -56,4 +56,5 @@ gem 'net-smtp'
 gem 'activerecord-import'
 gem 'kaminari'
 gem "chartkick"
+gem "form-select"
 

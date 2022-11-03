@@ -2,32 +2,33 @@ class EntriesController < ApplicationController
   before_action :set_entry, only: %i[ show ]
 
   # GET /entries or /entries.json
+  def home
+    render :template => "entries/home"
+  end
+
   def index
-    @entries = Entry.all.page(params[:page])
+    if params[:search_by_country].present?
+      @entries = Entry.search_by_country(params[:search_by_country]).order('mean DESC').limit(10)
+
+    elsif params[:search_by_age].present?
+      @entries = Entry.search_by_age(params[:search_by_age]).order('mean DESC').limit(10)
+
+    elsif params[:search_by_food].present?
+      @entries = Entry.search_by_food(params[:search_by_food]).order('mean DESC').limit(10)
+    end
+
   end
 
   # GET /entries/1 or /entries/1.json
   def show
-  end
-
-  def country_top
-    @entries = Entry.where("country like ?", "%#{params[:country]}%").order('mean DESC').limit(20)
-  end  
+  end 
 
   def country
     @entries = Entry.where("country like ?", "%#{params[:country]}%").order('mean DESC').page(params[:page])
   end
 
-  def population_group_top
-    @entries = Entry.where("population_group like ?", "%#{params[:population_group]}%").order('mean DESC').limit(20)
-  end
-
   def population_group
     @entries = Entry.where("population_group like ?", "%#{params[:population_group]}%").order('mean DESC').page(params[:page])
-  end
-
-  def food_group_top
-    @entries = Entry.where("food_group like ?", "%#{params[:food_group]}%").order('mean DESC').limit(20)
   end
 
   def food_group

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'home/index'
   resources :entries
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/entries/top/country/:country', to: 'entries#country_top'
@@ -11,5 +10,5 @@ Rails.application.routes.draw do
   get '/entries/food/:food_group', to: 'entries#food_group'
 
   # Defines the root path route ("/")
-  root "home#index"
+  root "entries#home"
 end

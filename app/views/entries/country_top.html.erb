@@ -1,36 +1,6 @@
-<h1>Entries</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Country</th>
-      <th>Population group</th>
-      <th>Food group</th>
-      <th>Subjects</th>
-      <th>Consumers</th>
-      <th>Mean</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @entries.each do |entry| %>
-      <tr>
-        <td><%= entry.country %></td>
-        <td><%= entry.population_group %></td>
-        <td><%= entry.food_group %></td>
-        <td><%= entry.subjects %></td>
-        <td><%= entry.consumers %></td>
-        <td><%= entry.mean %></td>
-        <td><%= link_to 'Show', entry %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
   <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <%= javascript_include_tag src="https://www.gstatic.com/charts/loader.js" -%>
     <%= javascript_tag do -%>
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
@@ -39,10 +9,11 @@
         var data = JSON.parse('<%= @entries.to_json.html_safe -%>');
         data = [['Food Group', 'g/day']].concat(data);
         data = google.visualization.arrayToDataTable(data);
+        console.log(data)
 
         var options = {
           chart: {
-            title: 'What do people love most in ',
+            title: 'Top results',
           }
         };
 
@@ -53,5 +24,5 @@
     <% end -%>
   </head>
   <body>
-    <div id="columnchart_material" style="width: auto; height: 600px;"></div>
+    <div id="columnchart_material" style="width: full; height: 600px;"></div>
   </body>

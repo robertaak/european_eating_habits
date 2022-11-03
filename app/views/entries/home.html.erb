@@ -1,0 +1,30 @@
+<h1>What Food Do Europeans Love The Most?</h1>
+<p>If You have been wondering about this, look no further, because in this website You can finally get answers!</p>
+
+<div>
+    <h2>Search results by:</h2>
+    <div>
+        <p>Country</p>
+          <%= form_tag entries_path, method: :get do %>
+            <%= text_field_tag "search_by_country", nil, placeholder: "Country", required: true %>
+            <%= submit_tag "Search" %>
+          <% end %> 
+        <p>Population group</p>
+          <%= form_tag entries_path, method: :get do %>
+            <%= text_field_tag "search_by_age", nil, placeholder: "Age", required: true %>
+            <%= submit_tag "Search" %>
+          <% end %>
+        <p>Food Group</p>
+          <%= form_tag entries_path, method: :get do %>
+            <%= text_field_tag "search_by_food", nil, placeholder: "Food", required: true %>
+            <%= submit_tag "Search" %>
+          <% end %>
+    </div>
+
+    <div>
+        <p>What Nationality are You?</p>
+        <p>About Me</p>
+    </div>
+</div>
+
+
