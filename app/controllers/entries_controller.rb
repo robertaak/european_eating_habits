@@ -7,13 +7,15 @@ class EntriesController < ApplicationController
 
   def index
     if params[:search_by_country].present?
-      @entries = Entry.search_by_country(params[:search_by_country]).order('mean DESC').limit(10)
+      @entries = Entry.search_by_country(params[:search_by_country]).order('mean DESC').page params[:page]
 
     elsif params[:search_by_age].present?
-      @entries = Entry.search_by_age(params[:search_by_age]).order('mean DESC').limit(10)
+      @entries = Entry.search_by_age(params[:search_by_age]).order('mean DESC').page params[:page]
 
     elsif params[:search_by_food].present?
-      @entries = Entry.search_by_food(params[:search_by_food]).order('mean DESC').limit(10)
+      @entries = Entry.search_by_food(params[:search_by_food]).order('mean DESC').page params[:page]
+    else 
+      @entries = Entry.all.page params[:page]
     end
 
   end

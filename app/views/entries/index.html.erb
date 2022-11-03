@@ -1,4 +1,26 @@
 <h1>Entries</h1>
+
+<%= column_chart [
+  {
+    name: "Number of survey subjects",
+    data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group).sum(:subjects),
+    stack: "stack 1"
+  },
+  {
+    name: "Number of consumers",
+    data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group).sum(:consumers),
+    stack: "stack 2"
+  }
+  ] %>
+
+<%= column_chart [
+  {
+    name: "g/day, mean",
+    data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group).sum(:mean)
+  }
+] 
+%>
+
 <table>
   <thead>
     <tr>
@@ -27,4 +49,5 @@
   </tbody>
 </table>
 <br>
+<%= paginate @entries %>
 <%= link_to 'Back', '/' %>

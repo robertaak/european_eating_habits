@@ -8,17 +8,17 @@
 <p>Country</p>
       <%= form_with url: entries_path, method: "get" do |f| %>
         <%= f.select "search_by_country", options_from_collection_for_select(Country.all, :name, :name), { :include_blank => '-- Select Country --' }, :required => true %>
-        <%= f.submit %>
+        <%= f.submit "Search" %>
       <% end %>
      <p>Population group</p>
             <%= form_with url: entries_path, method: "get" do |f| %>
         <%= f.select "search_by_age", options_from_collection_for_select(PopulationGroup.all, :name, :name), { :include_blank => '-- Select Population Group --' }, :required => true %>
-        <%= f.submit %>
+        <%= f.submit "Search"  %>
       <% end %>
  <p>Food Group</p>
             <%= form_with url: entries_path, method: "get" do |f| %>
         <%= f.select "search_by_food", options_from_collection_for_select(FoodGroup.all, :name, :name), { :include_blank => '-- Select Food Group --' }, :required => true %>
-        <%= f.submit %>
+        <%= f.submit "Search"  %>
       <% end %>
           
     </div>
