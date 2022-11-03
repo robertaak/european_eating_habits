@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :population_groups
+  resources :food_groups
+  resources :countries
   resources :entries
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/entries/top/country/:country', to: 'entries#country_top'

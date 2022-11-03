@@ -3,7 +3,9 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def home
-    render :template => "entries/home"
+    @entries_by_country  = Entry.select('DISTINCT country').order('country ASC')
+    @entries_by_age  = Entry.select('DISTINCT population_group').order('population_group ASC')
+    @entries_by_food  = Entry.select('DISTINCT food_group').order('food_group ASC')
   end
 
   def index
