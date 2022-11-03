@@ -3,9 +3,6 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def home
-    @entries_by_country  = Entry.select('DISTINCT country').order('country ASC')
-    @entries_by_age  = Entry.select('DISTINCT population_group').order('population_group ASC')
-    @entries_by_food  = Entry.select('DISTINCT food_group').order('food_group ASC')
   end
 
   def index
@@ -24,18 +21,6 @@ class EntriesController < ApplicationController
   # GET /entries/1 or /entries/1.json
   def show
   end 
-
-  def country
-    @entries = Entry.where("country like ?", "%#{params[:country]}%").order('mean DESC').page(params[:page])
-  end
-
-  def population_group
-    @entries = Entry.where("population_group like ?", "%#{params[:population_group]}%").order('mean DESC').page(params[:page])
-  end
-
-  def food_group
-    @entries = Entry.where("food_group like ?", "%#{params[:food_group]}%").order('mean DESC').page(params[:page])
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
