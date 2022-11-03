@@ -3,22 +3,23 @@
 <%= column_chart [
   {
     name: "Number of survey subjects",
-    data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group).sum(:subjects),
+    data: @entries.limit(20).order('mean desc').group(:food_group, :population_group, :mean, :country).sum(:subjects),
     stack: "stack 1"
   },
   {
     name: "Number of consumers",
-    data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group).sum(:consumers),
+    data: @entries.limit(20).order('mean desc').group(:food_group, :population_group, :mean, :country).sum(:consumers),
     stack: "stack 2"
   }
-  ] %>
+  ], loading: "Loading this beautiful chart..." , empty: "Seems like there is no data -this happens when people haven't eaten anything from shown food groups" 
+  %>
 
 <%= column_chart [
   {
     name: "g/day, mean",
-    data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group).sum(:mean)
+    data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group, :country).sum(:mean)
   }
-] 
+], loading: "Loading this beautiful chart..." , empty: "Seems like there is no data -this happens when people haven't eaten anything from shown food groups" 
 %>
 
 <table>
