@@ -1,54 +1,72 @@
-<h1>Entries</h1>
+<%= render "shared/small-header"%>
+<div class="p-1">
+  <div class="m-6">
+    <%= column_chart [
+      {
+        name: "Number of survey subjects",
+        data: @entries.limit(20).order('mean desc').group(:food_group, :population_group, :mean, :country).sum(:subjects),
+        stack: "stack 1"
+      },
+      {
+        name: "Number of consumers",
+        data: @entries.limit(20).order('mean desc').group(:food_group, :population_group, :mean, :country).sum(:consumers),
+        stack: "stack 2"
+      }
+      ], 
+      loading: "Loading this beautiful chart...", 
+      empty: "Seems like there is no data -this happens when people haven't eaten anything from shown food groups",
+      height: "600px"
+    %>
+  </div>
 
-<%= column_chart [
-  {
-    name: "Number of survey subjects",
-    data: @entries.limit(20).order('mean desc').group(:food_group, :population_group, :mean, :country).sum(:subjects),
-    stack: "stack 1"
-  },
-  {
-    name: "Number of consumers",
-    data: @entries.limit(20).order('mean desc').group(:food_group, :population_group, :mean, :country).sum(:consumers),
-    stack: "stack 2"
-  }
-  ], loading: "Loading this beautiful chart..." , empty: "Seems like there is no data -this happens when people haven't eaten anything from shown food groups" 
-  %>
+  <div class="m-6">
+    <%= column_chart [
+      {
+        name: "g/day, mean",
+        data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group, :country).sum(:mean)
+      }
+      ], 
+      loading: "Loading this beautiful chart..." , 
+      empty: "Seems like there is no data -this happens when people haven't eaten anything from shown food groups",
+      height: "600px" 
+    %>
+  </div>
 
-<%= column_chart [
-  {
-    name: "g/day, mean",
-    data: @entries.limit(20).order('mean desc').group(:mean, :food_group, :population_group, :country).sum(:mean)
-  }
-], loading: "Loading this beautiful chart..." , empty: "Seems like there is no data -this happens when people haven't eaten anything from shown food groups" 
-%>
+  <div class="m-6 is-flex is-justify-content-center">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Population group</th>
+          <th>Food group</th>
+          <th>Subjects</th>
+          <th>Consumers</th>
+          <th>Mean, g/day</th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Country</th>
-      <th>Population group</th>
-      <th>Food group</th>
-      <th>Subjects</th>
-      <th>Consumers</th>
-      <th>Mean</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <tbody>
+        <% @entries.each do |entry| %>
+          <tr>
+            <td><%= entry.country %></td>
+            <td><%= entry.population_group %></td>
+            <td><%= entry.food_group %></td>
+            <td><%= entry.subjects %></td>
+            <td><%= entry.consumers %></td>
+            <td><%= entry.mean %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-  <tbody>
-    <% @entries.each do |entry| %>
-      <tr>
-        <td><%= entry.country %></td>
-        <td><%= entry.population_group %></td>
-        <td><%= entry.food_group %></td>
-        <td><%= entry.subjects %></td>
-        <td><%= entry.consumers %></td>
-        <td><%= entry.mean %></td>
-        <td><%= link_to 'Show', entry %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-<%= paginate @entries %>
-<%= link_to 'Back', '/' %>
+  <div class="is-flex is-justify-content-flex-start m-5">
+    <%= paginate @entries %>
+  </div>
+
+  <div class="is-flex is-justify-content-center">
+    <%= link_to 'Home ', '/', style: "color: gray; margin: 30px" %>
+  </div>
+</div>
+
+

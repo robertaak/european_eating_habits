@@ -1,32 +1,46 @@
-<h1>What Food Do Europeans Love The Most?</h1>
-<p>If You have been wondering about this, look no further, because in this website You can finally get answers!</p>
+<%= render "shared/header"%>
 
-<div>
-    <h2>Search results by:</h2>
-    <div>
+  <div class="m-6">
+    <h2 class="title has-text-link m-5">Search results by:</h2>
+  <div>
 
-<p>Country</p>
-      <%= form_with url: entries_path, method: "get" do |f| %>
-        <%= f.select "search_by_country", options_from_collection_for_select(Country.all, :name, :name), { :include_blank => '-- Select Country --' }, :required => true %>
-        <%= f.submit "Search" %>
-      <% end %>
-     <p>Population group</p>
-            <%= form_with url: entries_path, method: "get" do |f| %>
-        <%= f.select "search_by_age", options_from_collection_for_select(PopulationGroup.all, :name, :name), { :include_blank => '-- Select Population Group --' }, :required => true %>
-        <%= f.submit "Search"  %>
-      <% end %>
- <p>Food Group</p>
-            <%= form_with url: entries_path, method: "get" do |f| %>
-        <%= f.select "search_by_food", options_from_collection_for_select(FoodGroup.all, :name, :name), { :include_blank => '-- Select Food Group --' }, :required => true %>
-        <%= f.submit "Search"  %>
-      <% end %>
-          
+  <div class="tile is-ancestor m-4">
+
+    <div class="tile is-parent">
+      <div class="tile is-child box">
+        <p class="subtitle has-text-link-dark">Country:</p>
+        <%= form_with url: entries_path, method: "get" do |f| %>
+          <%= f.select "search_by_country", options_from_collection_for_select(Country.all, :name, :name), { :include_blank => '-- Select Country --' }, :required => true %>
+          <%= f.submit "Search" %>
+        <% end %>
+      </div>
     </div>
 
-    <div>
-        <p>What Nationality are You?</p>
-        <%= link_to 'About Me', '/about/index' %>
+    <div class="tile is-parent">
+      <div class="tile is-child box">
+        <p class="subtitle has-text-link-dark">Population group:</p>
+          <%= form_with url: entries_path, method: "get" do |f| %>
+            <%= f.select "search_by_age", options_from_collection_for_select(PopulationGroup.all, :name, :name), { :include_blank => '-- Select Population Group --' }, :required => true %>
+            <%= f.submit "Search" %>
+          <% end %>
+      </div>
     </div>
+
+    <div class="tile is-parent">
+      <div class="tile is-child box">
+        <p class="subtitle has-text-link-dark">Food Group:</p>
+          <%= form_with  url: entries_path, method: "get" do |f| %>
+            <%= f.select "search_by_food", options_from_collection_for_select(FoodGroup.all, :name, :name), { :include_blank => '-- Select Food Group --' }, :required => true %>
+            <%= f.submit "Search"  %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+<div class="is-flex is-justify-content-center">
+  <%= link_to 'Home ', '/', style: "color: gray; margin: 30px" %>
 </div>
+
+    
+    
 
 
